@@ -1,0 +1,61 @@
+buildscript {
+    repositories {
+        maven { url 'http://repo1.maven.org/maven2' }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.4'
+    }
+}
+apply plugin: 'android'
+
+dependencies {
+    //compile files('libs/android-support-v4.jar')
+    compile fileTree(dir: 'libs', includes: ['*.jar'])
+/*
+    compile project(':abs')
+    compile project(':yutori')
+//    compile project( library_name  as String)
+//    compile project( library_name2 as String)
+*/
+    lib_abs = project(':abs');
+    compile lib_abs
+    lib_yutori = project(':yutori');
+    compile lib_yutori
+
+//    fileSystem = com.sun.nio.zipfs.ZipFileSystem(new File(lib_abs.projectDir,"build/libs/abs-debug.aar"))
+//    path1 = fileSystem.getPath("classes.jar");
+//    fn_abs = path1.toFile();
+    fn_abs = new File(lib_abs.projectDir,"build/libs/abs-debug.aar")
+    //fn_abs = new File(lib_abs.projectDir,"build/libs/abs-debug/classes.jar")
+    println "[${fn_abs.exists()}]= ${fn_abs.dump()}"
+    compile files(fn_abs)
+    fn_yutori = new File(lib_yutori.projectDir,"build/libs//yutori.aar")
+    //fn_yutori = new File(lib_yutori.projectDir,"build/libs/yutori.aar!/classes.jar")
+    //fn_yutori = new File(lib_yutori.projectDir,"build/libs/yutori/classes.jar")
+    println "[${fn_yutori.exists()}]= ${fn_yutori.dump()}"
+    compile files(fn_yutori)
+}
+
+
+///Users/kimura/Documents/AndroidStudioProjects/actionbarsherlock/build/libs/abs-debug.aar
+///Users/kimura/Documents/AndroidStudioProjects/actionbarsherlock/build/libs/abs-debug.aar
+
+android {
+    compileSdkVersion 17
+    buildToolsVersion "17.0.0"
+
+    defaultConfig {
+        minSdkVersion 4
+        targetSdkVersion 17
+    }
+}
+
+build.doFirst{
+    println "aaaaaa"
+}
+
+/*
+task apiJar(dependsOn: classes, type: Jar) {
+    classifier = 'api'
+}
+*/
