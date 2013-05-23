@@ -3,16 +3,13 @@ repositories {
 }
 apply plugin: 'idea'
 
-
-allProject {
-    version = '1.0'
-	println('all!')
+allprojects{
+	version = '1.0'
+    println('all!')
 }
 
-/*
 //see http://d.hatena.ne.jp/nightmare_tim+gradlerevercelookup/searchdiary?word=%2A%5Ballprojects%5D
 defaultTasks 'callProject'
 task callProject(dependsOn:['abstest','abs','yutori']) << {
-   println('from allProject')
+   println('from allProjects')
 }
-*/
