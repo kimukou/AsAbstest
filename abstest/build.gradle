@@ -4,7 +4,7 @@ repositories {
 apply plugin: 'idea'
 
 
-allprojects {
+allProject {
     version = '1.0'
 	println('all!')
 }
