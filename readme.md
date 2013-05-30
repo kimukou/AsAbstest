@@ -1,9 +1,9 @@
-## eclipse形式MultiProject検証コード
+## AS新規プロジェクト形式MultiProject検証コード
 
-see 
-http://d.hatena.ne.jp/kimukou_26/20130520/p1  
-http://d.hatena.ne.jp/kimukou_26/20130524/p1
-
+- see
+ - http://d.hatena.ne.jp/kimukou_26/20130520/p1
+ - http://d.hatena.ne.jp/kimukou_26/20130524/p1
+ 
 
 - OK) AsAbstest/abstest_ec から
   - ./gradlew clean build
