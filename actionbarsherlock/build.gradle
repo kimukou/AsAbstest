@@ -40,6 +40,9 @@ android {
 
         instrumentTest.setRoot('tests')
     }
+	tasks.withType(Compile) {
+   	   options.encoding = 'UTF-8' 
+   	}
 }
 
 
