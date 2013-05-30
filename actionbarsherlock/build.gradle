@@ -1,3 +1,4 @@
+/*
 buildscript {
     repositories {
         mavenCentral()
@@ -10,7 +11,7 @@ buildscript {
 repositories {
    mavenCentral()
 }
-apply plugin: 'idea'
+*/
 
 apply plugin: 'android-library'
 
