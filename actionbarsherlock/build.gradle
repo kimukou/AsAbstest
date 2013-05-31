@@ -32,11 +32,11 @@ repositories {
   //maven type define
   maven { 
   	  name 'Android Support Repository'
-	  url "file:${System.properties["ANDROID_HOME"]}/extras/android/m2repository"
+	  url "file:${System.properties['ANDROID_HOME']}/extras/android/m2repository"
   }
   maven { 
 	name 'Google Repository'
-	url "file:${System.properties["ANDROID_HOME"]}/extras/google/m2repository"
+	url "file:${System.properties['ANDROID_HOME']}/extras/google/m2repository"
   }
 /*
   //flat type define
