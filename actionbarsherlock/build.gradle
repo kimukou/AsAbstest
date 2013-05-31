@@ -26,7 +26,7 @@ repositories {
 //
 //  nessesary mavenLocalDeployer task need?
 
-println "ANDROID_HOME=${System.properties["ANDROID_HOME"]}"
+println "ANDROID_HOME=${System.properties['ANDROID_HOME']}"
 repositories {
 
   //maven type define
