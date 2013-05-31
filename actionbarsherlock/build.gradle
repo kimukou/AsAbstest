@@ -19,6 +19,8 @@ repositories {
 //             and 
 //   gradle.properties define
 //         systemProp.ANDROID_HOME=/Aplications/android-sdks
+//       or
+//   rewrite System.properties["ANDROID_HOME"] => System.getProperty("ANDROID_HOME")
 // 
 //   but not run..... why?
 //
@@ -26,12 +28,22 @@ repositories {
 
 println "ANDROID_HOME=${System.properties["ANDROID_HOME"]}"
 repositories {
+
+  //maven type define
   maven { 
-  	url "file://${System.properties["ANDROID_HOME"]}/extras/android/m2repository"
+  	  name 'Android Support Repository'
+	  url "file:${System.properties["ANDROID_HOME"]}/extras/android/m2repository"
   }
   maven { 
-	url "file://${System.properties["ANDROID_HOME"]}/extras/google/m2repository"
+	name 'Google Repository'
+	url "file:${System.properties["ANDROID_HOME"]}/extras/google/m2repository"
   }
+/*
+  //flat type define
+  flatDir{
+     dirs "file://${System.properties["ANDROID_HOME"]}/extras/android/m2repository","file://${System.properties["ANDROID_HOME"]}/extras/google/m2repository"
+  }  
+*/
 }
 
 
@@ -39,7 +51,7 @@ apply plugin: 'android-library'
 
 dependencies {
 	compile fileTree(dir: 'libs', includes: ['*.jar'])
-	//compile 'com.android.support:support-v4:13.0.0'
+	//compile 'com.android.support:support-v4:13.0.0'  //not run
 }
 
 android {
