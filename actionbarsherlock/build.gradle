@@ -13,10 +13,33 @@ repositories {
 }
 */
 
+
+//[note]Android Support Repository & Google Repository  test
+//         need android update sdk
+//             and 
+//   gradle.properties define
+//         systemProp.ANDROID_HOME=/Aplications/android-sdks
+// 
+//   but not run..... why?
+//
+//  nessesary mavenLocalDeployer task need?
+
+println "ANDROID_HOME=${System.properties["ANDROID_HOME"]}"
+repositories {
+  maven { 
+  	url "file://${System.properties["ANDROID_HOME"]}/extras/android/m2repository"
+  }
+  maven { 
+	url "file://${System.properties["ANDROID_HOME"]}/extras/google/m2repository"
+  }
+}
+
+
 apply plugin: 'android-library'
 
 dependencies {
 	compile fileTree(dir: 'libs', includes: ['*.jar'])
+	//compile 'com.android.support:support-v4:13.0.0'
 }
 
 android {
