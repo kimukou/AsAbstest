@@ -7,16 +7,55 @@ buildscript {
     }
 }
 
+
+
+
 repositories {
    mavenCentral()
 }
-
 apply plugin: 'idea'
 
 allprojects{
 	//version = '1.0'
     //println('all!')
 	println "[allprojects]This is ${project.name}"
+	
+
+
+	//[note]Android Support Repository & Google Repository  test
+	//         need android update sdk
+	//             and 
+	//   gradle.properties define
+	//         systemProp.ANDROID_HOME=/Aplications/android-sdks
+	//       or
+	//   rewrite System.properties["ANDROID_HOME"] => System.getProperty("ANDROID_HOME")
+	//
+	//[Remarks] multi projectだとココに定義しないと駄目みたい。。。
+
+	println "ANDROID_HOME=${System.properties['ANDROID_HOME']}"
+	repositories {
+		//maven type define
+		 maven { 
+  		 	 name 'Android Support Repository'
+	 		 url "file://${System.properties['ANDROID_HOME']}/extras/android/m2repository"
+  		}
+  		maven { 
+			name 'Google Repository'
+			url "file://${System.properties['ANDROID_HOME']}/extras/google/m2repository"
+  		}
+		ivy { 
+			name 'Local ivy Repository'
+			url "file://${System.properties['user.home']}/.ivy2/cache"
+  		}
+/*
+	  //flat type define
+	  flatDir{
+    	 dirs "file://${System.properties["ANDROID_HOME"]}/extras/android/m2repository","file://${System.properties["ANDROID_HOME"]}/extras/google/m2repository"
+  	  }  
+*/
+	}
+
+
 }
 
 /*
