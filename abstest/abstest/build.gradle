@@ -27,6 +27,9 @@ dependencies {
 //    fileSystem = com.sun.nio.zipfs.ZipFileSystem(new File(lib_abs.projectDir,"build/libs/abs-debug.aar"))
 //    path1 = fileSystem.getPath("classes.jar");
 //    fn_abs = path1.toFile();
+
+
+	 compile "org.twitter4j:twitter4j-core:3.0.4-SNAPSHOT" //mavenからDLする記述
 }
 
 

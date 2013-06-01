@@ -1,25 +1,34 @@
 buildscript {
     repositories {
-        maven { url 'http://repo1.maven.org/maven2' }
+	   mavenCentral() //の指定でも可能
+       //maven { url 'http://repo1.maven.org/maven2' }
     }
-    dependencies {
+
+	dependencies {
         classpath 'com.android.tools.build:gradle:0.4.2'
+		//androidannotations test
+		def gradleAndroidAnnotationsPluginVersion = '0.3.0'
+		classpath "net.ealden.gradle.plugins:gradle-androidannotations-plugin:$gradleAndroidAnnotationsPluginVersion"
     }
 }
-
-
-
-
+/*
 repositories {
    mavenCentral()
 }
+*/
+
 apply plugin: 'idea'
+
+//androidannotations test(not run)
+/*
+apply plugin: 'androidannotations'
+androidAnnotationsVersion = '2.2'
+*/
 
 allprojects{
 	//version = '1.0'
     //println('all!')
 	println "[allprojects]This is ${project.name}"
-	
 
 
 	//[note]Android Support Repository & Google Repository  test
@@ -43,10 +52,14 @@ allprojects{
 			name 'Google Repository'
 			url "file://${System.properties['ANDROID_HOME']}/extras/google/m2repository"
   		}
+		//こっちは動かない？位置が駄目？
+		/*
 		ivy { 
 			name 'Local ivy Repository'
 			url "file://${System.properties['user.home']}/.ivy2/cache"
   		}
+		*/
+		mavenRepo urls: 'http://twitter4j.org/maven2'
 /*
 	  //flat type define
 	  flatDir{
@@ -54,8 +67,6 @@ allprojects{
   	  }  
 */
 	}
-
-
 }
 
 /*
