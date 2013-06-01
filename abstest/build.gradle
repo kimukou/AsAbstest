@@ -6,9 +6,11 @@ buildscript {
 
 	dependencies {
         classpath 'com.android.tools.build:gradle:0.4.2'
-		//androidannotations test
+/*
+		//androidannotations plugin test
 		def gradleAndroidAnnotationsPluginVersion = '0.3.0'
 		classpath "net.ealden.gradle.plugins:gradle-androidannotations-plugin:$gradleAndroidAnnotationsPluginVersion"
+*/		
     }
 }
 /*
@@ -19,13 +21,14 @@ repositories {
 
 apply plugin: 'idea'
 
-//androidannotations test(not run)
+//androidannotations plugin test(not run)
 /*
 apply plugin: 'androidannotations'
 androidAnnotationsVersion = '2.2'
 */
 
 allprojects{
+
 	//version = '1.0'
     //println('all!')
 	println "[allprojects]This is ${project.name}"
@@ -60,6 +63,7 @@ allprojects{
   		}
 		*/
 		mavenRepo urls: 'http://twitter4j.org/maven2'
+	    mavenCentral()
 /*
 	  //flat type define
 	  flatDir{
@@ -67,6 +71,7 @@ allprojects{
   	  }  
 */
 	}
+	
 }
 
 /*
