@@ -31,10 +31,10 @@ dependencies {
 	compile "org.twitter4j:twitter4j-core:3.0.4-SNAPSHOT" //mavenからDLする記述
 	
 	//androidannotations参照これじゃ駄目なんだっけ？
-	compile "com.googlecode.androidannotations:androidannotations:2.7.1" 
+	//compile "com.googlecode.androidannotations:androidannotations:2.7.1" 
 	compile "com.googlecode.androidannotations:androidannotations-api:2.7.1"
 }
-
+//println "dependencies=" + dependencies*.dump()
 
 task list(dependsOn: configurations.compile) {
      println "classpath = ${configurations.compile.collect {File file -> file.getAbsolutePath()}}"
