@@ -1,25 +1,38 @@
 buildscript {
     repositories {
-        maven { url 'http://repo1.maven.org/maven2' }
+	   mavenCentral() //の指定でも可能
+       //maven { url 'http://repo1.maven.org/maven2' }
     }
-    dependencies {
+
+	dependencies {
         classpath 'com.android.tools.build:gradle:0.4.2'
+		classpath "com.googlecode.androidannotations:androidannotations:2.7.1" 
+/*
+		//androidannotations plugin test
+		def gradleAndroidAnnotationsPluginVersion = '0.3.0'
+		classpath "net.ealden.gradle.plugins:gradle-androidannotations-plugin:$gradleAndroidAnnotationsPluginVersion"
+*/		
     }
 }
-
-
-
-
+/*
 repositories {
    mavenCentral()
 }
+*/
+
 apply plugin: 'idea'
 
-allprojects{
+//androidannotations plugin test(not run)
+/*
+apply plugin: 'androidannotations'
+androidAnnotationsVersion = '2.2'
+*/
+
+subprojects{
+
 	//version = '1.0'
     //println('all!')
-	println "[allprojects]This is ${project.name}"
-	
+	println "[subprojects]This is ${project.name}"
 
 
 	//[note]Android Support Repository & Google Repository  test
@@ -45,10 +58,23 @@ allprojects{
 			name 'Google Repository'
 			url "file://${System.properties['ANDROID_HOME']}/extras/google/m2repository"
   		}
+		//こっちは動かない？位置が駄目？
+/*
 		ivy { 
 			name 'Local ivy Repository'
-			url "file://${System.properties['user.home']}/.ivy2/cache"
+			//url "file://${System.properties['user.home']}/.ivy2/cache"
+			artifactPattern"file://${System.properties['user.home']}/.ivy2/[module]/[revision]/[artifact]-[revision].[ext]"
   		}
+*/		  
+		mavenRepo name:'twitter4j',urls:'http://twitter4j.org/maven2'
+		/*
+		//not run..why?
+		maven { 
+			name 'twitter4j'
+			url "'http://twitter4j.org/maven2"
+  		}
+		*/
+	    mavenCentral()
 /*
 	  //flat type define
 	  flatDir{
@@ -56,8 +82,18 @@ allprojects{
   	  }  
 */
 	}
-
-
+	println "[repositories-name]${repositories*.name}"
+/*	
+	println "-------------------------------------------"
+	println """[repositories-url]\n${ 
+			repositories.each{
+				if(it.hasProperty('url')){
+					print it.url.dump()
+					println ','
+				}
+			}
+	}"""
+*/
 }
 
 /*
