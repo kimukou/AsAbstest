@@ -33,6 +33,8 @@ allprojects{
 	//[Remarks] multi projectだとココに定義しないと駄目みたい。。。
 
 	println "ANDROID_HOME=${System.properties['ANDROID_HOME']}"
+	println "USER_HOME=${System.properties['user.home']}"
+	
 	repositories {
 		//maven type define
 		 maven { 
