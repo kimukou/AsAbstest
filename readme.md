@@ -17,7 +17,7 @@
  - includeFlat を使うと
 
 ``
-  allprojects{
+  subprojects{
      version = '1.0'
   }
 ``
@@ -26,6 +26,24 @@
 - (公式サイトのようにプロジェクト下方に2階層潜る場合は上記の記述が要らない）
  - <= android grade plugin 辺の制限？
 
+
+-----------------------------
+## Google Repository/Android Repository を使う場合の制限
+
+- craf さんの指摘により
+-- 1) MainP/local.properties のsdk.dir(ANDROID_HOME) を検索
+-- 2) 環境変数の ANDROID_HOME を検索
+でANDROID_HOMEの位置を決定し
+
+``
+File androidRepo = new File(mSdkLocation + "/extras/android/m2repository");
+File googleRepo = new File(mSdkLocation + "/extras/google/m2repository");
+repositories.add(new File(mPlatformRootFolder + "/prebuilts/sdk/m2repository"));
+
+``
+という形で自動登録する形で動くようなので、正常に動かないときは上記の設定を注意すること
+
+(環境パス優先なら local.properties を要リネム)
 
 -----------------------------
 ## ANDROID_HOME等に環境パスをしていない場合

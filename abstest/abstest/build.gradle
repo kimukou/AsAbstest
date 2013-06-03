@@ -8,30 +8,30 @@ buildscript {
     }
 }
 */
+
+repositories {
+	mavenCentral()
+	mavenRepo url: 'http://twitter4j.org/maven2'
+}
+
 apply plugin: 'android'
 
 dependencies {
     //compile files('libs/android-support-v4.jar')
     compile fileTree(dir: 'libs', includes: ['*.jar'])
 /*
-    compile project(':abs')
-    compile project(':yutori')
-//    compile project( library_name  as String)
-//    compile project( library_name2 as String)
+    compile project( library_name  as String)
+    compile project( library_name2 as String)
 */
     lib_abs = project(':abs');
     compile lib_abs
     lib_yutori = project(':yutori');
     compile lib_yutori
 
-//    fileSystem = com.sun.nio.zipfs.ZipFileSystem(new File(lib_abs.projectDir,"build/libs/abs-debug.aar"))
-//    path1 = fileSystem.getPath("classes.jar");
-//    fn_abs = path1.toFile();
-
 	compile "org.twitter4j:twitter4j-core:3.0.4-SNAPSHOT" //mavenからDLする記述
 	
 	//androidannotations参照これじゃ駄目なんだっけ？
-	//compile "com.googlecode.androidannotations:androidannotations:2.7.1" 
+	//compile "com.googlecode.androidannotations:androidannotations:2.7.1" //理想的には classpath or runtime?(こちらはまだ未実装っぽい)
 	compile "com.googlecode.androidannotations:androidannotations-api:2.7.1"
 }
 //println "dependencies=" + dependencies*.dump()
@@ -56,8 +56,14 @@ android {
 }
 
 build.doFirst{
-    println "aaaaaa"
+    println "=======buiild start======="
 }
+
+build.doLast{
+    println "=======buiild end======="
+}
+
+
 
 /*
 task apiJar(dependsOn: classes, type: Jar) {
