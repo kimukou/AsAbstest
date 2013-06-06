@@ -31,17 +31,23 @@
 -----------------------------
 ## Google Repository/Android Repository を使う場合の制限
 
-- craf さんの指摘により
--- 1) MainP/local.properties のsdk.dir 記述(ANDROID_HOME) を検索
--- 2) MainP/local.properties のandroid.dir 記述(ANDROID_HOME) を検索
--- 3) 環境変数の ANDROID_HOME を検索// System.getenv("ANDROID_HOME") 
--- 4) System.getProperty("android.home") を検索 //＜＝ここは gradle.propertiesで設定可能
+- craf さんの指摘により  
+ - 1)MainP/local.properties のsdk.dir 記述(ANDROID_HOME) を検索  
+ - 2) MainP/local.properties のandroid.dir 記述(ANDROID_HOME) を検索  
+ - 3) 環境変数の ANDROID_HOME を検索// System.getenv("ANDROID_HOME")   
+ - 4) System.getProperty("android.home") を検索 //＜＝ここは gradle.propertiesで設定可能  
 
 でANDROID_HOMEの位置を決定し
 
 ``
 File androidRepo = new File(mSdkLocation + "/extras/android/m2repository");
+``
+ 
+``
 File googleRepo = new File(mSdkLocation + "/extras/google/m2repository");
+``
+
+``
 repositories.add(new File(mPlatformRootFolder + "/prebuilts/sdk/m2repository"));
 ``
 
