@@ -21,6 +21,7 @@
      version = '1.0'
   }
 ``
+
 の定義が必要(0.4.1からはなくても動くようになりました)
 
 - (公式サイトのようにプロジェクト下方に2階層潜る場合は上記の記述が要らない）
@@ -31,16 +32,19 @@
 ## Google Repository/Android Repository を使う場合の制限
 
 - craf さんの指摘により
--- 1) MainP/local.properties のsdk.dir(ANDROID_HOME) を検索
--- 2) 環境変数の ANDROID_HOME を検索
+-- 1) MainP/local.properties のsdk.dir 記述(ANDROID_HOME) を検索
+-- 2) MainP/local.properties のandroid.dir 記述(ANDROID_HOME) を検索
+-- 3) 環境変数の ANDROID_HOME を検索// System.getenv("ANDROID_HOME") 
+-- 4) System.getProperty("android.home") を検索 //＜＝ここは gradle.propertiesで設定可能
+
 でANDROID_HOMEの位置を決定し
 
 ``
 File androidRepo = new File(mSdkLocation + "/extras/android/m2repository");
 File googleRepo = new File(mSdkLocation + "/extras/google/m2repository");
 repositories.add(new File(mPlatformRootFolder + "/prebuilts/sdk/m2repository"));
-
 ``
+
 という形で自動登録する形で動くようなので、正常に動かないときは上記の設定を注意すること
 
 (環境パス優先なら local.properties を要リネム)
@@ -51,5 +55,7 @@ repositories.add(new File(mPlatformRootFolder + "/prebuilts/sdk/m2repository"));
 - gradle.properties 等が別途必要
 
 ``
-systemProp.ANDROID_HOME='/Applications/android-sdks'
+systemProp.android.home='/Applications/android-sdks'
 ``
+
+面倒なら $HOME/.gradle/gradle.properties 辺りに上記をおく

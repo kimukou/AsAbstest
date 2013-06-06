@@ -29,6 +29,7 @@ subprojects{
 println "USER_HOME=${System.properties['user.home']}"
 println "ANDROID_HOME=${System.properties['ANDROID_HOME']}"
 println "sdk.dir=${System.properties['sdk.dir']}" //nullなのでgradle環境変数としては星
+println "android.home=${System.properties['android.home']}"
 
 
 // http://www.gradle.org/docs/current/dsl/org.gradle.api.plugins.ExtraPropertiesExtension.html
