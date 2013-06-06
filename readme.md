@@ -5,7 +5,7 @@
  - http://d.hatena.ne.jp/kimukou_26/20130524/p1
  
 
-- OK) AsAbstest/abstest_ec から
+- OK) AsAbstest/abstest から
   - ./gradlew clean build
 
 - OK) OKの構成でAndroid Studioから実行
