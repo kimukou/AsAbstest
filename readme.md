@@ -8,7 +8,10 @@
 - OK) AsAbstest/abstest から
   - ./gradlew clean build
 
-- OK) OKの構成でAndroid Studioから実行
+- OK) OKの構成でAndroid Studio v0.1.2 から実行
+
+- NG) OKの構成でAndroid Studio v0.1.3 から実行
+ - IDEA Pluginの事前settings.gradleの下層にフォルダ有るかパスチェックみたいな機構で実行できなくなりました(余計な機能！！)
 
 -----------------------------
 ## 現状わかっている android grade pluginの制限
