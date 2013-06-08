@@ -7,10 +7,10 @@ library_name='abs'
 //include library_name
 includeFlat library_name //仮想パス
 
-lib_prg = project(":$library_name");
-lib_prg.projectDir=new File(settingsDir,'../actionbarsherlock')
-println "[name]=" + lib_prg.name
-println "[dir ]=" + lib_prg.projectDir
+lib_abs = project(":$library_name");
+lib_abs.projectDir=new File(settingsDir,'../actionbarsherlock')
+println "[name]=" + lib_abs.name
+println "[dir ]=" + lib_abs.projectDir
 
 
 
@@ -19,11 +19,9 @@ library_name2='yutori'
 //include library_name2
 includeFlat library_name2 //仮想パス
 
-lib_prg = project(":$library_name2")
-//lib_prg = project(library_name2);
-lib_prg.projectDir=new File(settingsDir,'../lib_yutori/lib_yutori')
-println "[name]=" + lib_prg.name
-println "[dir ]=" + lib_prg.projectDir
-
-
+lib_yutori = project(":$library_name2")
+//lib_yutori = project(library_name2);
+lib_yutori.projectDir=new File(settingsDir,'../lib_yutori/lib_yutori')
+println "[name]=" + lib_yutori.name
+println "[dir ]=" + lib_yutori.projectDir
 

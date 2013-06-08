@@ -13,19 +13,20 @@
 - NG) OKの構成でAndroid Studio v0.1.3 から実行
  - IDEA Pluginの事前settings.gradleの下層にフォルダ有るかパスチェックみたいな機構で実行できなくなりました(余計な機能！！)
 
+
 -----------------------------
 ## 現状わかっている android grade pluginの制限
 
 - 浅い階層(1階層 or 相対パス)で見るために
  - includeFlat を使うと
 
-``
+```
   subprojects{
      version = '1.0'
   }
-``
+```
 
-の定義が必要(0.4.1からはなくても動くようになりました)
+の定義が必要(0.4.1からは無くても動くようになりました)
 
 - (公式サイトのようにプロジェクト下方に2階層潜る場合は上記の記述が要らない）
  - <= android grade plugin 辺の制限？
@@ -42,17 +43,11 @@
 
 でANDROID_HOMEの位置を決定し
 
-``
+```
 File androidRepo = new File(mSdkLocation + "/extras/android/m2repository");
-``
- 
-``
 File googleRepo = new File(mSdkLocation + "/extras/google/m2repository");
-``
-
-``
 repositories.add(new File(mPlatformRootFolder + "/prebuilts/sdk/m2repository"));
-``
+```
 
 という形で自動登録する形で動くようなので、正常に動かないときは上記の設定を注意すること
 
@@ -63,8 +58,8 @@ repositories.add(new File(mPlatformRootFolder + "/prebuilts/sdk/m2repository"));
  
 - gradle.properties 等が別途必要
 
-``
+```
 systemProp.android.home='/Applications/android-sdks'
-``
+```
 
 面倒なら $HOME/.gradle/gradle.properties 辺りに上記をおく
