@@ -15,8 +15,11 @@ repositories {
 
 apply plugin: 'android'
 
+//see http://www.gradle.org/docs/current/dsl/org.gradle.api.artifacts.ConfigurationContainer.html
 configurations {
-    apt
+    apt//{
+	//	transitive = false
+	//}
 }
 println "------------------------------------"
 println "apt="+configurations.apt.dump()
@@ -60,7 +63,8 @@ android {
    	}
 }
 
-//ココでエラー＞＜
+//[TODO]ココでエラー＞＜ 保留
+/*
 android.applicationVariants.each { variant ->
     aptOutput = file("${project.buildDir}/source/apt_generated/${variant.dirName}")
     println "****************************"
@@ -80,6 +84,7 @@ android.applicationVariants.each { variant ->
         ]
     }
 }
+*/
 
 /*
 build.doFirst{
