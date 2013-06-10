@@ -44,6 +44,13 @@ dependencies {
 	apt "com.googlecode.androidannotations:androidannotations:$androidAnnotationsVersion" 
 	compile "com.googlecode.androidannotations:androidannotations-api:$androidAnnotationsVersion"
 }
+
+//see http://d.hatena.ne.jp/taichitaichi/20120110/1326175750
+// この書き方だと testCompileも対象になるとのこと
+def encoding = { it.encoding = 'UTF-8'}
+tasks.withType (AbstractCompile) each {encoding it.options}
+
+
 //println "dependencies=" + dependencies*.dump()
 task list(dependsOn: configurations.compile) {
      println "classpath = ${configurations.compile.collect {File file -> file.getAbsolutePath()}}"
@@ -57,10 +64,11 @@ android {
         minSdkVersion 4
         targetSdkVersion 17
     }
-	
+/*	
 	tasks.withType(Compile) {
    	   options.encoding = 'UTF-8' 
    	}
+*/	   
 }
 
 //[TODO]ココでエラー＞＜ 保留
