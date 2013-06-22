@@ -1,5 +1,7 @@
 ## AS新規プロジェクト形式MultiProject検証コード
 
+- [English-readme.md](readme.md)
+
 - see
  - http://d.hatena.ne.jp/kimukou_26/20130520/p1
  - http://d.hatena.ne.jp/kimukou_26/20130524/p1
