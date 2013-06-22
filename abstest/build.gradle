@@ -1,17 +1,12 @@
 buildscript {
     repositories {
-	   mavenCentral() //の指定でも可能
+	   mavenCentral()
        //maven { url 'http://repo1.maven.org/maven2' }
     }
 
 	dependencies {
         classpath 'com.android.tools.build:gradle:0.4.2'
 		classpath "com.googlecode.androidannotations:androidannotations:2.7.1" 
-/*
-		//androidannotations plugin test
-		def gradleAndroidAnnotationsPluginVersion = '0.3.0'
-		classpath "net.ealden.gradle.plugins:gradle-androidannotations-plugin:$gradleAndroidAnnotationsPluginVersion"
-*/		
     }
 }
 
@@ -35,4 +30,5 @@ println "android.home=${System.properties['android.home']}"
 project.ext {
     supportV4Version = "13.0.0"
 	androidAnnotationsVersion='2.7.1'
+	jppVersion = '1.6.+'
 }

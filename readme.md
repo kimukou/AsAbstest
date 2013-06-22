@@ -1,47 +1,49 @@
-## AS新規プロジェクト形式MultiProject検証コード
+## AS new project format MultiProject verification code
+
+- [Japanise-readme.md](readme_ja.md)
 
 - see
  - http://d.hatena.ne.jp/kimukou_26/20130520/p1
  - http://d.hatena.ne.jp/kimukou_26/20130524/p1
  
 
-- OK) AsAbstest/abstest から
+- OK) from AsAbstest/abstest 
   - ./gradlew clean build
 
-- OK) OKの構成でAndroid Studio v0.1.2 から実行
+- OK) OK structure Android Studio v0.1.2 is run
 
-- NG) OKの構成でAndroid Studio v0.1.3 から実行
- - IDEA Pluginの事前settings.gradleの下層にフォルダ有るかパスチェックみたいな機構で実行できなくなりました(余計な機能！！)
-
+- NG) OK structure Android Studio v0.1.3 not run
+ - prepare IDEA Plugin settings.gradle check lower folder
+ 
 
 -----------------------------
-## 現状わかっている android grade pluginの制限
+## Limit of android grade plugin known status
 
-- 浅い階層(1階層 or 相対パス)で見るために
- - includeFlat を使うと
-
+- To see (1 hierarchy or relative path) shallow hierarchy
+ - using includeFlat 
+ 
 ```
   subprojects{
      version = '1.0'
   }
 ```
 
-の定義が必要(0.4.1からは無くても動くようになりました)
+need define (from 0.4.1 run, prepare not need write)
 
-- (公式サイトのようにプロジェクト下方に2階層潜る場合は上記の記述が要らない）
- - <= android grade plugin 辺の制限？
+- (The above description does not need If you dive in two-tier project downward as the official site)
+ - <= android grade plugin limit?
 
 
 -----------------------------
-## Google Repository/Android Repository を使う場合の制限
+## Google Repository/Android Repository using limit
 
-- craf さんの指摘により  
- - 1)MainP/local.properties のsdk.dir 記述(ANDROID_HOME) を検索  
- - 2) MainP/local.properties のandroid.dir 記述(ANDROID_HOME) を検索  
- - 3) 環境変数の ANDROID_HOME を検索// System.getenv("ANDROID_HOME")   
- - 4) System.getProperty("android.home") を検索 //＜＝ここは gradle.propertiesで設定可能  
-
-でANDROID_HOMEの位置を決定し
+- mr craf appoint problem
+ - 1)MainP/local.properties has sdk.dir (ANDROID_HOME) search  
+ - 2) MainP/local.properties has android.dir (ANDROID_HOME) search  
+ - 3) enviroments ANDROID_HOME search// System.getenv("ANDROID_HOME")   
+ - 4) System.getProperty("android.home") search //＜＝gradle.properties has can setting
+ 
+ANDROID_HOME location deside 
 
 ```
 File androidRepo = new File(mSdkLocation + "/extras/android/m2repository");
@@ -49,17 +51,19 @@ File googleRepo = new File(mSdkLocation + "/extras/google/m2repository");
 repositories.add(new File(mPlatformRootFolder + "/prebuilts/sdk/m2repository"));
 ```
 
-という形で自動登録する形で動くようなので、正常に動かないときは上記の設定を注意すること
 
-(環境パス優先なら local.properties を要リネム)
+Because such work in a way that is automatically registered in the form of,   
+you can note the above settings when you do not work properly
+
+(If environment path first local.properties need mv _local.properties )
 
 -----------------------------
-## ANDROID_HOME等に環境パスをしていない場合
+## If you do not have the environment path to ANDROID_HOME etc.
  
-- gradle.properties 等が別途必要
+- gradle.properties Required separately
 
 ```
 systemProp.android.home='/Applications/android-sdks'
 ```
 
-面倒なら $HOME/.gradle/gradle.properties 辺りに上記をおく
+Or $HOME/.gradle/gradle.properties put.

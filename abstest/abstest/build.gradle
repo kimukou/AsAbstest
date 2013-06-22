@@ -17,19 +17,20 @@ apply plugin: 'android'
 
 //see http://www.gradle.org/docs/current/dsl/org.gradle.api.artifacts.ConfigurationContainer.html
 configurations {
-    apt//{
-	//	transitive = false
-	//}
+    apt
 }
+/*
 println "------------------------------------"
 println "apt="+configurations.apt.dump()
 println "------------------------------------"
+*/
 
 androidAnnotationsVersion='2.7.1'
 dependencies {
     //compile files('libs/android-support-v4.jar')
     compile fileTree(dir: 'libs', includes: ['*.jar'])
 /*
+    //[NOTE]not ref settings def
     compile project( library_name  as String)
     compile project( library_name2 as String)
 */
@@ -38,16 +39,24 @@ dependencies {
     lib_yutori = project(':yutori');
     compile lib_yutori
 
-	compile "org.twitter4j:twitter4j-core:3.0.4-SNAPSHOT" //mavenからDLする記述
-	
-	println "androidAnnotationsVersion=$androidAnnotationsVersion"
+	compile "org.twitter4j:twitter4j-core:3.0.4-SNAPSHOT" //DL from maven
+
+    //[NOTE]see  http://stackoverflow.com/questions/16683944/androidannotations-nothing-generated-empty-activity/16802216#16802216
+	//println "androidAnnotationsVersion=$androidAnnotationsVersion"
 	apt "com.googlecode.androidannotations:androidannotations:$androidAnnotationsVersion" 
 	compile "com.googlecode.androidannotations:androidannotations-api:$androidAnnotationsVersion"
+	
+	
+    //[NOTE]see http://d.hatena.ne.jp/esmasui/20130607/1370574632
+    apt "net.vvakame:jsonpullparser-apt:${jppVersion}"
+    compile "net.vvakame:jsonpullparser-core:${jppVersion}"
 }
 //println "dependencies=" + dependencies*.dump()
+/*
 task list(dependsOn: configurations.compile) {
      println "classpath = ${configurations.compile.collect {File file -> file.getAbsolutePath()}}"
 }
+*/
 
 android {
     compileSdkVersion 17
@@ -63,28 +72,46 @@ android {
    	}
 }
 
-//[TODO]ココでエラー＞＜ 保留
-/*
+//[TODO]
+// reference http://zaki.tdiary.net/20130620.html#p01
+//
+//  but AndroidManifest.xml edit need
+//
+//   <activity
+//         android:name=".MainActivity_"  //☆ need [_]
+//
+//  see http://stackoverflow.com/questions/15768684/androidannotations2-7-1-androidmanifest-xml-file-contains-the-original-compone
+
 android.applicationVariants.each { variant ->
-    aptOutput = file("${project.buildDir}/source/apt_generated/${variant.dirName}")
-    println "****************************"
-    println "variant: ${variant.name}"
-    println "manifest:  ${variant.processResources.manifestFile}"
-    println "aptOutput:  ${aptOutput}"
-    println "processorpath:  ${configurations.apt.getAsPath()}"
-    println "****************************"
+    //def aptOutput = file("${project.buildDir}/source/apt_generated/${variant.dirName}")
+	def aptOutput = file("${project.buildDir}/source/r/${variant.dirName}")
+//    println "****************************"
+//    println "variant: ${variant.name}"
+//    println "manifest:  ${variant.processResources.manifestFile}"
+//    println "aptOutput:  ${aptOutput}"
+//    println "processorpath:  ${configurations.apt.getAsPath()}"
+//    println "****************************"
 
     variant.javaCompile.doFirst {
-        println "*** compile doFirst ${variant.name}"
-        aptOutput.mkdirs()
+		println "*** compile doFirst ${variant.name}, aptOutput=${aptOutput}"
+		aptOutput.mkdirs()
+		
+		// Keep off if the old file exists because it is an error in the incremental build
+        aptOutput.eachFileRecurse groovy.io.FileType.FILES, {
+            if (it.name.equals('R.java')) {
+                return
+            }
+            it.delete()
+        }
         variant.javaCompile.options.compilerArgs += [
                 '-processorpath', configurations.apt.getAsPath(),
                 '-AandroidManifestFile=' + variant.processResources.manifestFile,
-                '-s', aptOutput
+                "-AJsonPullParserClassPostfix=Gererated",
+				"-AJsonPullParserDebug=true",
+				'-s', aptOutput
         ]
     }
 }
-*/
 
 /*
 build.doFirst{

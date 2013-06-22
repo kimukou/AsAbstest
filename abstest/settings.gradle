@@ -5,7 +5,7 @@ include ':abstest'
 library_name='abs'
 //library_name=':abs'
 //include library_name
-includeFlat library_name //仮想パス
+includeFlat library_name //Virtual path
 
 lib_abs = project(":$library_name");
 lib_abs.projectDir=new File(settingsDir,'../actionbarsherlock')
@@ -17,7 +17,7 @@ println "[dir ]=" + lib_abs.projectDir
 library_name2='yutori'
 //library_name2=':yutori'
 //include library_name2
-includeFlat library_name2 //仮想パス
+includeFlat library_name2 //Virtual path
 
 lib_yutori = project(":$library_name2")
 //lib_yutori = project(library_name2);
