@@ -52,10 +52,6 @@ dependencies {
     compile "net.vvakame:jsonpullparser-core:${jppVersion}"
 }
 
-//see http://d.hatena.ne.jp/taichitaichi/20120110/1326175750
-// この書き方だと testCompileも対象になるとのこと
-def encoding = { it.encoding = 'UTF-8'}
-tasks.withType (AbstractCompile) each {encoding it.options}
 
 
 //println "dependencies=" + dependencies*.dump()
@@ -78,6 +74,13 @@ android {
    	   options.encoding = 'UTF-8' 
    	}
 */	   
+
+	//see http://d.hatena.ne.jp/taichitaichi/20120110/1326175750
+	// It also testCompile and become the object that it is this way of writing
+	def encoding = { it.encoding = 'UTF-8'}
+	tasks.withType (AbstractCompile) each {
+		encoding it.options
+	}
 }
 
 //[TODO]
@@ -121,15 +124,7 @@ android.applicationVariants.each { variant ->
     }
 }
 
-/*
-build.doFirst{
-    println "=======buiild start======="
-}
 
-build.doLast{
-    println "=======buiild end======="
-}
-*/
 
 
 /*
