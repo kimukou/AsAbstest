@@ -51,6 +51,13 @@ dependencies {
     apt "net.vvakame:jsonpullparser-apt:${jppVersion}"
     compile "net.vvakame:jsonpullparser-core:${jppVersion}"
 }
+
+//see http://d.hatena.ne.jp/taichitaichi/20120110/1326175750
+// この書き方だと testCompileも対象になるとのこと
+def encoding = { it.encoding = 'UTF-8'}
+tasks.withType (AbstractCompile) each {encoding it.options}
+
+
 //println "dependencies=" + dependencies*.dump()
 /*
 task list(dependsOn: configurations.compile) {
@@ -66,10 +73,11 @@ android {
         minSdkVersion 4
         targetSdkVersion 17
     }
-	
+/*	
 	tasks.withType(Compile) {
    	   options.encoding = 'UTF-8' 
    	}
+*/	   
 }
 
 //[TODO]
