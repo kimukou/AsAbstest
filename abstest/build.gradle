@@ -5,7 +5,8 @@ buildscript {
     }
 
 	dependencies {
-        classpath 'com.android.tools.build:gradle:0.4.2'
+		classpath 'com.android.tools.build:gradle:0.5.+'
+        //classpath 'com.android.tools.build:gradle:0.4.2'
 		classpath "com.googlecode.androidannotations:androidannotations:2.7.1" 
     }
 }
@@ -28,7 +29,7 @@ println "android.home=${System.properties['android.home']}"
 
 // http://www.gradle.org/docs/current/dsl/org.gradle.api.plugins.ExtraPropertiesExtension.html
 project.ext {
-    supportV4Version = "13.0.0"
+    supportV4Version = "18.0.+"
 	androidAnnotationsVersion='2.7.1'
 	jppVersion = '1.6.+'
 }

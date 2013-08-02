@@ -93,7 +93,7 @@ android {
 //
 //  see http://stackoverflow.com/questions/15768684/androidannotations2-7-1-androidmanifest-xml-file-contains-the-original-compone
 
-android.applicationVariants.each { variant ->
+android.applicationVariants.all { variant ->
     //def aptOutput = file("${project.buildDir}/source/apt_generated/${variant.dirName}")
 	def aptOutput = file("${project.buildDir}/source/r/${variant.dirName}")
 //    println "****************************"
@@ -122,6 +122,11 @@ android.applicationVariants.each { variant ->
 				'-s', aptOutput
         ]
     }
+}
+
+android.applicationVariants.all { variant ->
+	def versionName = variant.mergedFlavor.versionName + (variant.buildType.versionNameSuffix != null ? variant.buildType.versionNameSuffix : "")
+	variant.generateBuildConfig.javaLines += "public static final String VERSION_NAME = \"${versionName}\";".toString()
 }
 
 
